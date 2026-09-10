@@ -28,7 +28,10 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-pubspec.lock
+
+# pubspec.lock: untuk APLIKASI (bukan package) file ini sebaiknya DI-COMMIT
+# agar versi dependency terkunci & build reproducible. Karena itu tidak
+# di-ignore di sini.
 
 # Symbolication / obfuscation
 app.*.symbols
@@ -74,9 +77,14 @@ app.*.map.json
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
-# Local env overrides (the committed .env holds placeholder defaults)
+# Environment files — berisi secret (API_APP_KEY), JANGAN di-commit.
+# Commit template `.env.example` / `env.example.json`; salin secara lokal.
+.env
 .env.local
 .env.*.local
+!.env.example
+env.json
+!env.example.json
 
 # Kiro IDE workspace files (steering, hooks, specs, settings) — keep local only
 .kiro/
