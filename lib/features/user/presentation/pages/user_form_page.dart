@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../domain/user.dart';
+import '../error_message.dart';
 import '../providers/user_providers.dart';
 
 /// Create or edit a user.
@@ -106,7 +107,7 @@ class _UserFormPageState extends ConsumerState<UserFormPage> {
     } catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Save failed: $error')),
+        SnackBar(content: Text('Save failed: ${messageForError(error)}')),
       );
     } finally {
       if (mounted) setState(() => _submitting = false);

@@ -22,8 +22,8 @@ class ApiClient {
     final cfg = _config;
     _dio.options = _dio.options.copyWith(
       baseUrl: cfg.apiBaseUrl,
-      connectTimeout: const Duration(seconds: 15),
-      receiveTimeout: const Duration(seconds: 15),
+      connectTimeout: cfg.apiTimeout,
+      receiveTimeout: cfg.apiTimeout,
       contentType: Headers.jsonContentType,
       headers: {
         'X-App-Key': cfg.apiAppKey,

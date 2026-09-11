@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../domain/user.dart';
+import '../error_message.dart';
 import '../providers/user_providers.dart';
 import '../widgets/error_view.dart';
 
@@ -42,7 +43,7 @@ class UserListPage extends ConsumerWidget {
             child: usersAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, _) => ErrorView(
-                message: error.toString(),
+                message: messageForError(error),
                 onRetry: () =>
                     ref.read(userListControllerProvider.notifier).refresh(),
               ),
@@ -258,7 +259,7 @@ class _UserTile extends ConsumerWidget {
     } catch (error) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Delete failed: $error')),
+          SnackBar(content: Text('Delete failed: ${messageForError(error)}')),
         );
       }
     }

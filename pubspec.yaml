@@ -35,5 +35,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # `.env` dibundel sebagai asset HANYA untuk kenyamanan pengembangan lokal
+  # (dimuat oleh flutter_dotenv). Untuk build rilis, JANGAN mengandalkan asset
+  # ini untuk secret — suntikkan nilai lewat --dart-define-from-file=env.json.
+  # Isi `.env` yang di-bundel akan ikut dalam APK/IPA dan bisa diekstrak.
   assets:
     - .env

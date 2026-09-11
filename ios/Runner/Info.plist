@@ -45,12 +45,31 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<!-- Allow cleartext HTTP to the local goapi service during development.
-	     Tighten or remove this before shipping to production. -->
+	<!-- App Transport Security.
+	     Cleartext HTTP hanya diizinkan untuk host goapi lokal (localhost /
+	     127.0.0.1) selama pengembangan; koneksi lain tetap mewajibkan HTTPS.
+	     NSAllowsLocalNetworking mengizinkan akses jaringan lokal tanpa
+	     melonggarkan ATS untuk internet publik. Untuk produksi, gunakan HTTPS
+	     dan hapus exception domain di bawah. -->
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSAllowsLocalNetworking</key>
 		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>127.0.0.1</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
 	</dict>
 </dict>
 </plist>
